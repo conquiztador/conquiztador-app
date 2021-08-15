@@ -32,7 +32,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "PixiJS Starter",
+      title: "Conquiztador",
     }),
     new CopyPlugin({
       patterns: [{ from: "src/assets", to: "assets" }],

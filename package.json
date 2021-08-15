@@ -1,7 +1,7 @@
 {
-  "name": "pixi-starter",
+  "name": "conquiztador-app",
   "version": "0.1.0",
-  "description": "Simple PixiJS starter",
+  "description": "Conquiztador App",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,9 +14,7 @@
     "prepare": "husky install"
   },
   "keywords": [
-    "pixi",
-    "pixijs",
-    "starter"
+    "conquiztador"
   ],
   "author": "Hristo Gatsinski",
   "license": "MIT",

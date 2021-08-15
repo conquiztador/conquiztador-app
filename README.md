@@ -1,3 +1,3 @@
-# pixi-starter
+# Conquiztador App
 
-A simple and easy to use PixiJS starter.
+The Conquiztador web application.
