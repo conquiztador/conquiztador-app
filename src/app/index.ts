@@ -3,7 +3,8 @@ import "reflect-metadata";
 import * as PIXI from "pixi.js";
 import { Container } from "typedi";
 
-import { Main } from "./components/Main";
+import { MenuPage } from "./pages/MenuPage";
+import { GamePage } from "./pages/GamePage";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (window as any).PIXI = PIXI;
@@ -18,5 +19,6 @@ loader
     .load(setup);
 
 function setup() {
-    Container.get(Main);
+    Container.get(MenuPage);
+    Container.get(GamePage);
 }
