@@ -6,6 +6,7 @@
       "app/*": ["src/app/*"],
       "components/*": ["src/app/components/*"],
       "managers/*": ["src/app/managers/*"],
+      "services/*": ["src/app/services/*"],
       "models/*": ["src/app/models/*"]
     },
     "outDir": "./dist/",
