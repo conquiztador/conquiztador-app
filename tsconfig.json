@@ -5,7 +5,8 @@
       "assets/*": ["src/assets/*"],
       "app/*": ["src/app/*"],
       "components/*": ["src/app/components/*"],
-      "managers/*": ["src/app/managers/*"]
+      "managers/*": ["src/app/managers/*"],
+      "models/*": ["src/app/models/*"]
     },
     "outDir": "./dist/",
     "sourceMap": true,
