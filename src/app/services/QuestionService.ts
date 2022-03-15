@@ -29,7 +29,7 @@ export class QuestionService {
         const jsonConvert = new JsonConvert();
 
         return jsonConvert.deserialize(
-            response.data,
+            { is_correct: false },
             AnswerStatus
         ) as AnswerStatus;
     }
