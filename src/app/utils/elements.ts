@@ -24,5 +24,17 @@ export function createButton(content: string): PIXI.Graphics {
 
     graphics.addChild(text);
 
+    graphics.on("pointerdown", () => {
+        graphics.scale.set(0.95);
+    });
+
+    graphics.on("pointerupoutside", () => {
+        graphics.scale.set(1);
+    });
+
+    graphics.on("pointerup", () => {
+        graphics.scale.set(1);
+    });
+
     return graphics;
 }
