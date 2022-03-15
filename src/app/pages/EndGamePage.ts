@@ -4,12 +4,14 @@ import * as PIXI from "pixi.js";
 import Application from "../Application";
 import { ButtonEvent, GameEvent } from "../Events";
 import { createButton } from "app/utils/elements";
+import { ScoreService } from "app/services/ScoreService";
 
 @Service()
 export class EndGamePage extends PIXI.Container {
     private _exitButton: PIXI.Graphics;
+    private scoreText: PIXI.Text;
 
-    constructor(private app: Application) {
+    constructor(private app: Application, private scoreService: ScoreService) {
         super();
 
         this.app.stage.addChild(this);
@@ -21,8 +23,14 @@ export class EndGamePage extends PIXI.Container {
         this.attachListeners();
     }
 
+    private reset() {
+        if (this.scoreText && this.scoreText.parent) {
+            this.scoreText.parent.removeChild(this.scoreText);
+        }
+    }
+
     private addGameOverText() {
-        const questionText = new PIXI.Text("Game over", {
+        const gameOverText = new PIXI.Text("Game over", {
             fontFamily: "Arial",
             fontWeight: "bold",
             fontSize: 24,
@@ -30,10 +38,28 @@ export class EndGamePage extends PIXI.Container {
             align: "center",
         });
 
-        this.addChild(questionText);
+        this.addChild(gameOverText);
 
-        questionText.anchor.set(0.5, 0.5);
-        questionText.position.set(this.app.center.x, 100);
+        gameOverText.anchor.set(0.5, 0.5);
+        gameOverText.position.set(this.app.center.x, 100);
+    }
+
+    private addScoreText() {
+        this.scoreText = new PIXI.Text(
+            `Your final score is: ${this.scoreService.score}`,
+            {
+                fontFamily: "Arial",
+                fontWeight: "bold",
+                fontSize: 24,
+                fill: 0xffffff,
+                align: "center",
+            }
+        );
+
+        this.addChild(this.scoreText);
+
+        this.scoreText.anchor.set(0.5, 0.5);
+        this.scoreText.position.set(this.app.center.x, 160);
     }
 
     private addExitButton() {
@@ -58,9 +84,9 @@ export class EndGamePage extends PIXI.Container {
     }
 
     private onAnswerSelected(data: { isCorrect: boolean }) {
-        console.error(data);
-
         if (!data.isCorrect) {
+            this.reset();
+            this.addScoreText();
             this.visible = true;
         }
     }
