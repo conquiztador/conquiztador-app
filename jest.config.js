@@ -10,5 +10,6 @@ module.exports = {
         "^services/(.*)": "<rootDir>/src/app/services/$1",
         "^models/(.*)": "<rootDir>/src/app/models/$1",
         "^utils/(.*)": "<rootDir>/src/app/utils/$1",
+        "^shared/(.*)": "<rootDir>/src/app/shared/$1",
     },
 };

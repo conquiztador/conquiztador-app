@@ -8,7 +8,8 @@
       "managers/*": ["src/app/managers/*"],
       "services/*": ["src/app/services/*"],
       "models/*": ["src/app/models/*"],
-      "utils/*": ["src/app/utils/*"]
+      "utils/*": ["src/app/utils/*"],
+      "shared/*": ["src/app/shared/*"]
     },
     "outDir": "./dist/",
     "sourceMap": true,
