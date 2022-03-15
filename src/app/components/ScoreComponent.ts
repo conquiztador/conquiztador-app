@@ -2,20 +2,20 @@ import { Service } from "typedi";
 import * as PIXI from "pixi.js";
 
 import Application from "../Application";
+import { ScoreService } from "app/services/ScoreService";
 
 @Service()
 export class ScoreComponent extends PIXI.Container {
-    private _score = 0;
-    private _scoreText: PIXI.Text;
+    private scoreText: PIXI.Text;
 
-    constructor(private app: Application) {
+    constructor(private app: Application, private scoreService: ScoreService) {
         super();
 
         this.addScore();
     }
 
     addScore(): void {
-        this._scoreText = new PIXI.Text(`${this._score}`, {
+        this.scoreText = new PIXI.Text(`${this.scoreService.score}`, {
             fontFamily: "Arial",
             fontWeight: "bold",
             fontSize: 24,
@@ -23,22 +23,22 @@ export class ScoreComponent extends PIXI.Container {
             align: "center",
         });
 
-        this.addChild(this._scoreText);
+        this.addChild(this.scoreText);
 
-        this._scoreText.anchor.set(1, 0);
-        this._scoreText.position.set(
-            this.app.view.width - this._scoreText.width,
+        this.scoreText.anchor.set(1, 0);
+        this.scoreText.position.set(
+            this.app.view.width - this.scoreText.width,
             10
         );
     }
 
     resetScore(): void {
-        this._score = 0;
-        this._scoreText.text = "0";
+        this.scoreService.reset();
+        this.scoreText.text = "0";
     }
 
     increaseScore(increment = 1): void {
-        this._score += increment;
-        this._scoreText.text = `${this._score}`;
+        this.scoreService.increaseScore(increment);
+        this.scoreText.text = `${this.scoreService.score}`;
     }
 }
