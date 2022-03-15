@@ -57,6 +57,7 @@ export class GamePage extends PIXI.Container {
     }
 
     private onNewGameButtonClicked() {
+        this.scoreComponent.resetScore();
         this.visible = true;
     }
 
@@ -65,7 +66,6 @@ export class GamePage extends PIXI.Container {
             this.scoreComponent.increaseScore();
             this.questionComponent.loadQuestion();
         } else {
-            this.scoreComponent.resetScore();
             this.visible = false;
         }
     }
