@@ -2,17 +2,23 @@ import { Service } from "typedi";
 import * as PIXI from "pixi.js";
 
 import Application from "../Application";
+import { Page } from "app/shared/Page";
 import { ButtonEvent, GameEvent } from "../Events";
 import { createButton } from "app/utils/elements";
 import { ScoreService } from "app/services/ScoreService";
+import LayerManager from "app/managers/LayerManager";
 
 @Service()
-export class EndGamePage extends PIXI.Container {
+export class EndGamePage extends Page {
     private _exitButton: PIXI.Graphics;
     private scoreText: PIXI.Text;
 
-    constructor(private app: Application, private scoreService: ScoreService) {
-        super();
+    constructor(
+        app: Application,
+        layerManager: LayerManager,
+        private scoreService: ScoreService
+    ) {
+        super(app, layerManager);
 
         this.app.stage.addChild(this);
         this.visible = false;
