@@ -3,31 +3,37 @@ import * as PIXI from "pixi.js";
 
 import Application from "../Application";
 import { ButtonEvent, GameEvent } from "../Events";
-import { QuestionComponent } from "app/components/QuestionComponent";
-import { ScoreComponent } from "app/components/ScoreComponent";
 import { createButton } from "app/utils/elements";
 
 @Service()
-export class GamePage extends PIXI.Container {
+export class EndGamePage extends PIXI.Container {
     private _exitButton: PIXI.Graphics;
 
-    constructor(
-        private app: Application,
-        private questionComponent: QuestionComponent,
-        private scoreComponent: ScoreComponent
-    ) {
+    constructor(private app: Application) {
         super();
 
         this.app.stage.addChild(this);
         this.visible = false;
 
-        this.addChild(this.scoreComponent);
-        this.addChild(this.questionComponent);
-
-        this.questionComponent.loadQuestion();
+        this.addGameOverText();
 
         this.addExitButton();
         this.attachListeners();
+    }
+
+    private addGameOverText() {
+        const questionText = new PIXI.Text("Game over", {
+            fontFamily: "Arial",
+            fontWeight: "bold",
+            fontSize: 24,
+            fill: 0xffffff,
+            align: "center",
+        });
+
+        this.addChild(questionText);
+
+        questionText.anchor.set(0.5, 0.5);
+        questionText.position.set(this.app.center.x, 100);
     }
 
     private addExitButton() {
@@ -42,12 +48,7 @@ export class GamePage extends PIXI.Container {
     }
 
     private attachListeners() {
-        this.app.stage.on(
-            ButtonEvent.newGameButtonClicked,
-            this.onNewGameButtonClicked,
-            this
-        );
-        this._exitButton.on("pointerup", this.onExitButtonClicked, this);
+        this._exitButton.on("pointerdown", this.onExitButtonClicked, this);
 
         this.app.stage.on(
             GameEvent.answerSelected,
@@ -56,17 +57,11 @@ export class GamePage extends PIXI.Container {
         );
     }
 
-    private onNewGameButtonClicked() {
-        this.visible = true;
-    }
-
     private onAnswerSelected(data: { isCorrect: boolean }) {
-        if (data.isCorrect) {
-            this.scoreComponent.increaseScore();
-            this.questionComponent.loadQuestion();
-        } else {
-            this.scoreComponent.resetScore();
-            this.visible = false;
+        console.error(data);
+
+        if (!data.isCorrect) {
+            this.visible = true;
         }
     }
 
