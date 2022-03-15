@@ -7,7 +7,8 @@
       "components/*": ["src/app/components/*"],
       "managers/*": ["src/app/managers/*"],
       "services/*": ["src/app/services/*"],
-      "models/*": ["src/app/models/*"]
+      "models/*": ["src/app/models/*"],
+      "utils/*": ["src/app/utils/*"]
     },
     "outDir": "./dist/",
     "sourceMap": true,
