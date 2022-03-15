@@ -3,17 +3,18 @@ import * as PIXI from "pixi.js";
 
 import Application from "../Application";
 import { ButtonEvent } from "../Events";
+import { Page } from "shared/Page";
 import { createButton } from "app/utils/elements";
+import LayerManager from "app/managers/LayerManager";
 
 @Service()
-export class MenuPage extends PIXI.Container {
+export class MenuPage extends Page {
     private _newGameButton: PIXI.Graphics;
 
-    constructor(private app: Application) {
-        super();
+    constructor(app: Application, layerManager: LayerManager) {
+        super(app, layerManager);
 
         this.visible = true;
-        this.app.stage.addChild(this);
 
         this.addNewGamesButton();
 
