@@ -3,6 +3,7 @@ import "reflect-metadata";
 import * as PIXI from "pixi.js";
 import { Container } from "typedi";
 
+import "./styles/main.css";
 import { MenuPage } from "./pages/MenuPage";
 import { GamePage } from "./pages/GamePage";
 import { EndGamePage } from "./pages/EndGamePage";

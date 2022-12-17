@@ -6,6 +6,8 @@ import LayerManager from "app/managers/LayerManager";
 
 @Service()
 export class Page extends PIXI.Container {
+    protected background: PIXI.Sprite
+
     constructor(
         protected app: Application,
         protected layerManager: LayerManager
@@ -15,12 +17,24 @@ export class Page extends PIXI.Container {
         this.app.stage.addChild(this);
 
         this.addBackground();
+
+        window.addEventListener('resize', () => {
+            this.redraw()
+        });
     }
 
     protected addBackground(): void {
+        this.background = this.createBackground()
+
+        this.background.parentLayer = this.layerManager.background;
+
+        this.addChild(this.background);
+    }
+
+    protected createBackground(): PIXI.Sprite {
         const context = document.createElement("canvas").getContext("2d");
-        context.canvas.width = this.app.view.width;
-        context.canvas.height = this.app.view.height;
+        context.canvas.width = window.innerWidth;
+        context.canvas.height = window.innerHeight;
 
         const gradient = context.createLinearGradient(
             0,
@@ -38,10 +52,13 @@ export class Page extends PIXI.Container {
         const baseTexture = new PIXI.BaseTexture(context.canvas);
         const texture = new PIXI.Texture(baseTexture);
 
-        const sprite = new PIXI.Sprite(texture);
+        return new PIXI.Sprite(texture);
+    }
 
-        sprite.parentLayer = this.layerManager.background;
-
-        this.addChild(sprite);
+    protected redraw(): void {
+        if (this.background) {
+            this.background.parent.removeChild(this.background)
+            this.addBackground()
+        }
     }
 }
