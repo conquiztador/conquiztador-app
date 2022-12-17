@@ -12,7 +12,7 @@ export default class Application extends PIXI.Application {
     }
 
     constructor() {
-        super({ width: 1280, height: 768 });
+        super({ width: 1280, height: 768, antialias: true });
 
         this.stage = new Stage();
 
