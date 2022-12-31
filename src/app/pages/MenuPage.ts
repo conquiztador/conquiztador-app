@@ -46,4 +46,11 @@ export class MenuPage extends Page {
         this.visible = false;
         this.app.stage.emit(ButtonEvent.newGameButtonClicked);
     }
+
+    protected redraw(): void {
+        super.redraw()
+
+        this._newGameButton.position.set(this.app.center.x, this.app.center.y);
+        console.error(this._newGameButton.scale, this._newGameButton.width)
+    }
 }

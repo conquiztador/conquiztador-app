@@ -18,9 +18,9 @@ export class Page extends PIXI.Container {
 
         this.addBackground();
 
-        window.addEventListener('resize', () => {
-            this.redraw()
-        });
+        // window.addEventListener('resize', () => {
+        //     this.redraw()
+        // });
     }
 
     protected addBackground(): void {
